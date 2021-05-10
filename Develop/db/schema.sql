@@ -4,3 +4,9 @@ DROP DATABASE IF EXISTS ecommerce_db;
 -- CREATE DATABASE
 CREATE DATABASE ecommerce_db;
 
+-- CREATE TABLES 
+CREATE TABLE products ( 
+    id INTEGER NOT NULL auto_increment, 
+
+    PRIMARY KEY AUTOINCREMENT
+)
