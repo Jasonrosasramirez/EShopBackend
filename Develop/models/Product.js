@@ -11,6 +11,7 @@ Product.init(
   {
     // define columns
   },
+  
   {
     sequelize,
     timestamps: false,
