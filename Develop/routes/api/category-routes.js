@@ -3,8 +3,22 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-router.get('/', (req, res) => {
+router.get('/', (req, res) => { // Home Page 
   // find all categories
+  try {
+    // try is the best case scenario 
+
+    const categoryDataMessage = await Category.findAll({
+      include: [{ model: Product }], // indluces the model as an object.
+    });
+    res.status(200).json(categoryDataMessage); // issue code 200 should all go well. 
+  }
+
+  catch(err) {
+    // if there is an error that happens. 
+    res.status(500).json(err); // displays the error. 
+  }
+
   // be sure to include its associated Products
 });
 
