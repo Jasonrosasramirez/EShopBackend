@@ -39,10 +39,10 @@ router.get('/:id', (req, res) => {
   try {
     const productDataMessage = await Product.findAll({
       include : [{model: Category}, 
-        {}]
+        {model: Tag, through: ProductTag, as: "tagged_product" }]
+    });
 
-
-    }) 
+    
 
   }
 
