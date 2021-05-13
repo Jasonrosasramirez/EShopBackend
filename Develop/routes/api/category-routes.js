@@ -61,7 +61,12 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
   try {
-    const categoryDataMessage;
+    const categoryDataMessage = await Category.update(req.body, {
+      where: {
+        id: req.params.id, 
+      }
+    });
+
 
 
 
