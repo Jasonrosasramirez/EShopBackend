@@ -37,7 +37,11 @@ router.get('/:id', (req, res) => {
     res.status(200).json(categoryDataMessage); // display message if all goes well. 
   }
 
-
+  catch(err) {
+    // if there is an error that happens. 
+    res.status(500).json(err); // displays the error. 
+  }
+  
   // be sure to include its associated Products
 });
 
