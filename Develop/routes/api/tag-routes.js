@@ -58,6 +58,26 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  try {
+    const tagDataMessage = await Tag.create(req.body, {
+      where: {
+        id: req.params.id,
+      }
+    }); 
+
+    if (!tagDataMessage) {
+      res.status(404).json({message : "Hey look! The page is missing 404"});
+      return;
+    }; 
+
+    res.status(200).json(tagDataMessage)
+  }
+
+  catch (err) {
+
+
+  }
+
 });
 
 router.delete('/:id', (req, res) => {
