@@ -7,38 +7,33 @@ const ProductTag = require('./ProductTag');
 // This script joins the seperate scripts together. 
 
 // Products belongsTo Category
-Product.belongsTo(Category, { 
+Product.belongsTo(Category, {
   // product is the category
   // belongsTo | automatically lookups an artical that has the asme id as the category_id column
 
   foreignKey: "category_id", // refering to the main 
+  onDelete: "CASCADE", // del;ete the rows and child records
 });
 
 
 // Categories have many Products
-Category.hasMany({
-  foreignKey: "category_id", 
-  onDelete: "CASCADE", 
+Category.hasMany(Product, {
+  foreignKey: "category_id",
+  onDelete: "CASCADE",
 });
 
 
 // Products belongToMany Tags (through ProductTag)
-Product.belongsToMany(Tag, { 
-  through: {
-    model: ProductTag, 
-    unique: false
-  }, 
-  as: "tagged_product"
+Product.belongsToMany(Tag, {
+  through: ProductTag,
+  foreignKey: "Product_Key"
 });
 
 
 // Tags belongToMany Products (through ProductTag)
-Tag.belongsToMany(Product, { 
-  through: {
-    model: ProductTag, 
-    unique: false
-  }, 
-  as: "tagged_product"
+Tag.belongsToMany(Product, {
+  through: ProductTag,
+  foreignKey: "tag_id"
 });
 
 

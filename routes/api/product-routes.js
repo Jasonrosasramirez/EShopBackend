@@ -4,30 +4,24 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', async(req, res) => {
+router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
-  try {
-    const productDataMessage = await Product.findAll({
-      // search all searches multiple instances. 
+  
+  Product.findAll({
+    include: [
+      Category, 
+      {
+        model: Tag, 
+        through: ProductTag
+      }
+    ]})
+  .then(
+    products => res.json(products)
 
-      include: [
-        { model: Category }, 
-        { model: Tag, through: ProductTag, as: "tagged_product" }]
-          
-          // where
-          // Attribute 1 
-          // Attribute 2 
-
-    });
-
-    res.status(200).json(productDataMessage); 
-  }
-
-  catch (err) {
-    res.status(500).json(err);
-  }
-
+  )
+  .catch(err => res.json(err)); 
+  
 });
 
 
@@ -36,28 +30,29 @@ router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 
-  try {
-    const productDataMessage = await Product.findAll({
-      include : [{model: Category}, 
-        {model: Tag, through: ProductTag, as: "tagged_product" }]
-    });
+  Product.findOne({
+    where: {
+      id: req.params.id
+    }, 
 
-    if (!productDataMessage) {
-      res.status(400).json({message: "the page is missing :( "});
-      return; 
-    }
+    include: [
+      Category, 
+      {
+        model: Tag, 
+        through: ProductTag
+      }
+    ]
+  })
+  .then(
+    products => res.json(products)
 
-    res.status(200).json(productDataMessage); 
-  }
-
-  catch (err) {
-    res.status(500).json(err);
-  }
+  )
+  .catch(err => res.json(err)); 
 
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async(req, res) => {
 
   try {
     const productDataMessage = await Product.create(req.body, res, {
@@ -161,7 +156,7 @@ router.delete('/:id', (req, res) => {
     }
 
     res.status(200).json(productDataMessage);
-  } 
+  }
 
   catch (err) {
     res.status(500).json(err);
