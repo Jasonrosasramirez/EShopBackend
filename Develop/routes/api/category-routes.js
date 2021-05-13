@@ -81,6 +81,17 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  
+  
+  try {
+
+    req.status(200).json
+  }
+
+  catch (err) {
+    req.status(500).json(err);
+  }
+
 });
 
 module.exports = router;
