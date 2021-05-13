@@ -84,8 +84,18 @@ router.delete('/:id', (req, res) => {
   
   
   try {
+    const categoryDataMessage = await Category.destroy({
+      where: { 
+        id: req.params.id
+      }
+    }); 
 
-    req.status(200).json
+    if (!categoryDataMessage) {
+      res.status(404).json( {message: "Page not found :( "} );
+      return;
+    }
+
+    req.status(200).json(categoryDataMessage); 
   }
 
   catch (err) {
