@@ -42,27 +42,45 @@ router.get('/:id', (req, res) => {
         {model: Tag, through: ProductTag, as: "tagged_product" }]
     });
 
-    
+    if (!productDataMessage) {
+      res.status(400).json({message: "the page is missing :( "});
+      return; 
+    }
 
+    res.status(200).json(productDataMessage); 
   }
 
-  catch {
-
-
+  catch (err) {
+    res.status(500).json(err);
   }
 
 });
 
 // create new product
 router.post('/', (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
+
+  try {
+    const productDataMessage = await Product.create(req.body, res, {
+      where: {
+        product_name: "Basketball",
+        price: 200.00,
+        stock: 3,
+        tagIds: [1, 2, 3, 4]
+      }
+    });
+
+    if (!productData) {
+      res.status(404).json({ message: "page not found :(" });
+      return;
     }
-  */
+
+    res.status(200).json(productDataMessage);
+  }
+
+  catch (err) {
+    res.status(500).json(err);
+  }
+
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
