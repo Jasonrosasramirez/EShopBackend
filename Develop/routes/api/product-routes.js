@@ -18,8 +18,13 @@ router.get('/', async(req, res) => {
           as: "tagged_product" }]
     });
 
-
+    res.status(200).json(productDataMessage); 
   }
+
+  catch (err) {
+    res.status(500).json(err);
+  }
+
 });
 
 // get one product
