@@ -29,7 +29,12 @@ router.get('/:id', (req, res) => {
       include: [{ model: Product }]
     });
 
-    
+    if (!categoryDataMessage) { // if the page is empty 
+      res.status(404).json({ message: "Page was not found :( "}) // display this if the page is missing
+      return; 
+    }
+
+    res.status(200).json(categoryDataMessage); // display message if all goes well. 
   }
 
 
