@@ -24,6 +24,15 @@ router.get('/', (req, res) => { // Home Page
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
+  try {
+    const categoryDataMessage = await Category.findByPk(req.params.id, {
+      include: [{ model: Product }]
+    });
+
+    
+  }
+
+
   // be sure to include its associated Products
 });
 
