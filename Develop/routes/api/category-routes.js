@@ -67,14 +67,16 @@ router.put('/:id', (req, res) => {
       }
     });
 
-
-
+    if (!categoryDataMessage) {
+      res.status(404).json( {Message: "The page has not been found :("} );
+    };
 
     res.status(200).json(categoryDataMessage); // message if all goes well. 
-
   }
 
-
+  catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.delete('/:id', (req, res) => {
