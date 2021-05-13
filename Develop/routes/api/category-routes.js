@@ -55,11 +55,21 @@ router.post('/', (req, res) => {
   catch (err) {
     res.status(400).json(err);
   }
-  
+
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  try {
+    const categoryDataMessage;
+
+
+
+    res.status(200).json(categoryDataMessage); // message if all goes well. 
+
+  }
+
+
 });
 
 router.delete('/:id', (req, res) => {
