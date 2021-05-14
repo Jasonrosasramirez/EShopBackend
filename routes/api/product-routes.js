@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
   })
     .then(
       products => res.json(products)
-
     )
     .catch(err => res.json(err));
 });
