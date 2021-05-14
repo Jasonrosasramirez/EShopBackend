@@ -43,17 +43,23 @@ router.get('/:id', (req, res) => {
     .catch(err => res.json(err));
 });
 
-router.post('/', async(req, res) => {
+router.post('/', (req, res) => {
   // create a new tag
-  try {
-    const tagDataMessage = await Tag.create(req.body); 
-    res.status(200).json(tagDataMessage);
-  }
-
-  catch (err) {
-    res.status(500).json(err);
-  }
-
+  
+    Tag.create(req.body) 
+    .then(product => {
+      if (req.body.tagIds && req.body.tagIds.length) {
+        const productTagIdArr = req.body.tagIds.map(tag_id => {
+          return {
+            product_id: product.id,
+            tag_id,
+          }
+        })
+        return ProductTag.bulkCreate(productTagIdArr)
+      }
+    }).catch((err) {
+      res.status(500).json(err);
+    })
 });
 
 router.put('/:id', async(req, res) => {
