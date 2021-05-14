@@ -9,7 +9,7 @@ router.get('/', async(req, res) => { // Home Page
     // try is the best case scenario 
 
     const categoryDataMessage = await Category.findAll({
-      include: [{ model: Product }], // indluces the model as an object.
+      include: [{ model: Product }], // includes the model as an object.
     });
     res.status(200).json(categoryDataMessage); // issue code 200 should all go well. 
   }

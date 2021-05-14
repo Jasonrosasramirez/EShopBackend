@@ -11,10 +11,8 @@ router.get('/', (req, res) => {
   Product.findAll({
     include: [
       Category,
-      {
-        model: Tag,
-        through: ProductTag
-      }
+      { model: Tag,
+        through: ProductTag}
     ]
   })
     .then(
@@ -22,7 +20,6 @@ router.get('/', (req, res) => {
 
     )
     .catch(err => res.json(err));
-
 });
 
 
@@ -46,10 +43,8 @@ router.get('/:id', (req, res) => {
   })
     .then(
       products => res.json(products)
-
     )
     .catch(err => res.json(err));
-
 });
 
 // create new product
@@ -147,7 +142,6 @@ router.delete('/:id', (req, res) => {
 
     )
     .catch(err => res.json(err));
-
 });
 
 module.exports = router;
