@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
         })
         return ProductTag.bulkCreate(productTagIdArr)
       }
-    }).catch((err) {
+    }).catch((err) => {
       res.status(500).json(err);
     })
 
