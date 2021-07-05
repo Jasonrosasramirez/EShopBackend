@@ -105,7 +105,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -153,11 +153,11 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-    .then(
-      products => res.json(products)
-
+    .then(products => 
+      res.json(products)
     )
-    .catch(err => res.json(err));
+    .catch((err) => 
+      res.json(err));
 });
 
 module.exports = router;
