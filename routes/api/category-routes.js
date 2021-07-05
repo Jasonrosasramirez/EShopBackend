@@ -33,7 +33,6 @@ router.get('/:id', async(req, res) => {
       res.status(404).json({ message: "Page was not found :( "}) // display this if the page is missing
       return; 
     }
-
     res.status(200).json(categoryDataMessage); // display message if all goes well. 
   }
 
@@ -67,8 +66,9 @@ router.put('/:id', async(req, res) => {
       }
     });
 
-    if (!categoryDataMessage) {
+    if (!categoryDataMessage[0]) {
       res.status(404).json( {Message: "The page has not been found :("} );
+      return;
     };
 
     res.status(200).json(categoryDataMessage); // message if all goes well. 
