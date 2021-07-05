@@ -22,6 +22,7 @@ router.get('/', async(req, res) => { // Home Page
   // be sure to include its associated Products
 });
 
+
 router.get('/:id', async(req, res) => {
   // find one category by its `id` value
   try {
@@ -44,6 +45,7 @@ router.get('/:id', async(req, res) => {
   // be sure to include its associated Products
 });
 
+
 router.post('/', async(req, res) => {
   // create a new category
   try {
@@ -56,6 +58,7 @@ router.post('/', async(req, res) => {
   }
 
 });
+
 
 router.put('/:id', async(req, res) => {
   // update a category by its `id` value
@@ -78,6 +81,7 @@ router.put('/:id', async(req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 router.delete('/:id', async(req, res) => {
   // delete a category by its `id` value
